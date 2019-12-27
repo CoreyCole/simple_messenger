@@ -20,8 +20,8 @@ class _SignUpButtonState extends State<SignUpButton> {
       color: Theme.of(context).primaryColor,
       onPressed: () async {
         try {
-          final handle = bloc.auth.signUpUsername.value;
-          final displayName = bloc.auth.signUpDisplayName.value;
+          final handle = bloc.auth.signUpUsernameInput.value;
+          final displayName = bloc.auth.signUpDisplayNameInput.value;
           final publicKey = bloc.crypto.publicKey.value;
           await bloc.auth.signUp(handle, publicKey, displayName);
           Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);

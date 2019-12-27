@@ -84,7 +84,10 @@ class MessengerService {
   /// If a chat already exists between the `userIds`, a reference to it will be returned.
   Future<DocumentReference> createChat(List<String> userIds, { String name = '' }) async {
     try {
-      final userId = authService.userId.value;
+      final user = authService.user.value;
+      if (user == null)
+        throw 'user not authenticated!';
+      final userId = user.uid;
       final chatDoc = await firebaseService.createChat(userId, userIds, name);
       return chatDoc;
     } catch (err, stack) {
@@ -94,9 +97,12 @@ class MessengerService {
   }
 
   Future<DocumentReference> createMessage(String message) {
+    final user = authService.user.value;
+    if (user == null)
+      throw 'user not authenticated!';
     final encryptedMessage = encryptionService.encrypt(message);
     final chatId = currentChatId.value;
-    final userId = authService.userId.value;
+    final userId = user.uid;
     firebaseService.createMessage(userId, chatId, encryptedMessage);
   }
 

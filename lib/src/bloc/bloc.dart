@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:localstorage/localstorage.dart';
 
 import 'services/auth_service.dart';
@@ -8,6 +9,7 @@ import 'services/messenger_service.dart';
 
 /// The Business logic component
 class Bloc {
+  final FirebaseApp firebaseApp = FirebaseApp(name: 'DEFAULT');
   LocalStorage storage;
 
   AuthService auth;
@@ -18,7 +20,7 @@ class Bloc {
 
   Bloc() {
     storage = LocalStorage('storage.json');
-    firebase = FirebaseService();
+    firebase = FirebaseService(firebaseApp: firebaseApp);
     crypto = EncryptionService();
     globals = GlobalsService();
     auth = AuthService(storage: storage, firebaseService: firebase, encryptionService: crypto);

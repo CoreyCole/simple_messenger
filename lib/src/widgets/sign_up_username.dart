@@ -13,7 +13,7 @@ class _SignUpUsernameState extends State<SignUpUsername> {
   build(BuildContext context) {
     final bloc = Provider.of(context);
     textController.addListener(() {
-      bloc.auth.signUpUsername.sink.add(textController.text);
+      bloc.auth.signUpUsernameInput.sink.add(textController.text);
     });
     return TextField(
       controller: textController,

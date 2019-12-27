@@ -7,12 +7,6 @@ import '../widgets/chat_messages.dart';
 class ChatScreen extends StatelessWidget {
   build(BuildContext context) {
     final bloc = Provider.of(context);
-
-    // TODO: remove
-    bloc.messenger.currentChatId.sink.add('test-chatId');
-    bloc.auth.userId.sink.add('test-userId');
-    bloc.auth.username.sink.add('test-username');
-
     return WillPopScope(
       onWillPop: () async {
         bloc.messenger.leaveChat();

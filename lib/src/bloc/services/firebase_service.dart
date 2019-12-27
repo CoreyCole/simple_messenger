@@ -1,10 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseService {
   final Firestore _firestore;
+  final FirebaseApp firebaseApp;
 
-  FirebaseService()
+  FirebaseService({ this. firebaseApp })
     : _firestore = Firestore.instance;
 
   /// If `userId` or `chatId` does not exist, an error will be thrown.
